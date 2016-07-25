@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<configuration>
+    <property>
+        <name>hbase.rootdir</name>
+        <value>hdfs://mycluster/user/hbase</value>
+        <description>The directory shared by RegionServers.</description>
+    </property>
+    
+    <property>
+        <name>hbase.tmp.dir</name>
+        <value>/home/hadoopuser/hbase-0.98.9-hadoop2/tmp/hbase-${user.name}</value>
+        <description>Temporary directory on the local filesystem.</description>
+    </property>
+
+  
+    <!-- default hadoop is 3, if you want to change hadoop replication default -->
+    <property>
+        <name>dfs.replication</name>
+        <value>3</value>
+        <description>The replication count for HLog and HFile storage. Should not be greater than HDFS datanode count.
+        </description>
+    </property>
+  
+  
+    <property>
+        <name>hbase.cluster.distributed</name>
+        <value>true</value>
+        <description>The mode the cluster will be in. Possible values are
+            false: standalone and pseudo-distributed setups with managed Zookeeper
+            true: fully-distributed with unmanaged Zookeeper Quorum (see hbase-env.sh)
+        </description>
+    </property>
+    
+    <property>
+      <name>hbase.zookeeper.quorum</name>
+      <value>master,slave1,idoharness</value>
+      <description>Comma separated list of servers in the ZooKeeper Quorum.
+      For example, "host1.mydomain.com,host2.mydomain.com,host3.mydomain.com".
+      By default this is set to localhost for local and pseudo-distributed modes
+      of operation. For a fully-distributed setup, this should be set to a full
+      list of ZooKeeper quorum servers. If HBASE_MANAGES_ZK is set in hbase-env.sh
+      this is the list of servers which we will start/stop ZooKeeper on.
+      </description>
+    </property>
+    
+    <property>
+      <name>hbase.zookeeper.property.clientPort</name>
+      <value>2181</value>
+      <description>Property from ZooKeeper’s config zoo.cfg. The port at which the clients will connect.</description>
+    </property>
+    
+    <property>
+      <name>hbase.zookeeper.property.dataDir</name>
+      <value>/home/hadoopuser/zookeeper/zookeeper-3.4.6/data</value>
+      <description>Property from ZooKeeper's config zoo.cfg.The directory where the snapshot is stored.</description>
+    </property>
+    
+    <property>
+      <name>hbase.master.wait.on.regionservers.mintostart</name>
+      <value>3</value>
+    </property>
+    
+    <property>
+      <name>hbase.block.cache.size</name>
+      <value>0</value>
+    </property>
+    
+    
+    <property>
+        <name>hbase.lease.recovery.dfs.timeout</name>
+        <value>23000</value>
+        <description>How much time we allow elapse between calls to recover lease.
+                Should be larger than the dfs timeout.</description>
+    </property>
+    <property>
+        <name>dfs.client.socket-timeout</name>
+        <value>10000</value>
+        <description>Down the DFS timeout from 60 to 10 seconds.</description>
+    </property>
+    
+    <property>
+        <name>dfs.client.socket-timeout</name>
+        <value>10000</value>
+        <description>Down the DFS timeout from 60 to 10 seconds.</description>
+    </property>
+    <property>
+        <name>dfs.datanode.socket.write.timeout</name>
+        <value>10000</value>
+        <description>Down the DFS timeout from 8 * 60 to 10 seconds.</description>
+    </property>
+    <property>
+        <name>ipc.client.connect.timeout</name>
+        <value>3000</value>
+        <description>Down from 60 seconds to 3.</description>
+    </property>
+    <property>
+        <name>ipc.client.connect.max.retries.on.timeouts</name>
+        <value>2</value>
+        <description>Down from 45 seconds to 3 (2 == 3 retries).</description>
+    </property>
+    <property>
+        <name>dfs.namenode.avoid.read.stale.datanode</name>
+        <value>true</value>
+        <description>Enable stale state in hdfs</description>
+    </property>
+    <property>
+        <name>dfs.namenode.stale.datanode.interval</name>
+        <value>20000</value>
+        <description>Down from default 30 seconds</description>
+    </property>
+    <property>
+        <name>dfs.namenode.avoid.write.stale.datanode</name>
+        <value>true</value>
+        <description>Enable stale state in hdfs</description>
+    </property>
+    
+    <property>
+        <name>hbase.defaults.for.version.skip</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hbase.regionserver.wal.codec</name>
+        <value>org.apache.hadoop.hbase.regionserver.wal.IndexedWALEditCodec</value>
+    </property>
+    <property>
+        <name>hbase.region.server.rpc.scheduler.factory.class</name>
+        <value>org.apache.phoenix.hbase.index.ipc.PhoenixIndexRpcSchedulerFactory</value>
+        <description>Factory to create the Phoenix RPC Scheduler that knows to put index updates into index queues</description>
+    </property>
+    <property>
+        <name>hbase.master.loadbalancer.class</name>
+        <value>org.apache.phoenix.hbase.index.balancer.IndexLoadBalancer</value>
+    </property>
+    <property>
+        <name>hbase.coprocessor.master.classes</name>
+        <value>org.apache.phoenix.hbase.index.master.IndexMasterObserver</value>
+    </property>
+
+
+    
+    
+
+</configuration>
