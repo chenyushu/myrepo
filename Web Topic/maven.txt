@@ -1,0 +1,21 @@
+Missing artifact jdk.tools:jdk.tools:jar:1.6
+
+Google一番后了解到，jdk.tools:jdk.tools是与JDK一起分?的一?JAR文件，可以如下方式加入到Maven?目中：
+<dependency>
+    <groupId>jdk.tools</groupId>
+    <artifactId>jdk.tools</artifactId>
+    <version>1.6</version>
+    <scope>system</scope>
+    <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+</dependency>
+
+??Maven FAQ for adding dependencies to tools.jar
+
+也可以在本地??中手?安?tools.jar，如下
+mvn install:install-file -DgroupId=jdk.tools -DartifactId=jdk.tools -Dpackaging=jar -Dversion=1.6 -Dfile=tools.jar -DgeneratePom=true
+然后在pom.xml中添加：
+<dependency>
+    <groupId>jdk.tools</groupId>
+    <artifactId>jdk.tools</artifactId>
+    <version>1.6</version>
+</dependency>
